@@ -1,0 +1,23 @@
+from flask import Flask , make_response ,request
+app=Flask(__name__)
+
+@app.route('/')
+def home():
+    # return "Welcome to the home page"
+    response = make_response("<h1>Welcome to the home page</h1>")
+    return response
+
+@app.route('/set_cookie')
+def set_cookie():
+    response = make_response("<h1>Welcome to the Set Cookie page!</h1>")
+    response.set_cookie("cookie_name","cookie_value")
+    return response
+@app.route('/get_cookie')
+def get_cookie():
+    value = request.cookies.get("cookie_name")
+    response = make_response(f"<h1> The Cookie value is <i>{value}</i>!</h1>")
+    return response
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
